@@ -11,6 +11,7 @@
 (function () {
     'use strict';
 
+    // 引用js和css
     let jsSrc = document.createElement("script");
     jsSrc.src = "https://vjs.zencdn.net/7.4.1/video.js";
     document.head.appendChild(jsSrc);
@@ -21,6 +22,7 @@
     cssSrc.rel = "stylesheet";
     cssSrc.href = 'https://vjs.zencdn.net/7.0.0/video-js.css';
     document.head.appendChild(cssSrc);
+    // 稍微改下样式
     let newStyle = document.createElement("style");
     newStyle.innerText = ".video-js .vjs-big-play-button {top: 50%;left: 50%;transform: translate(-50%,-50%);}";
     document.head.appendChild(newStyle);
@@ -47,13 +49,13 @@
         newSource.setAttribute("type", "application/x-mpegURL");
         newVideo.appendChild(newSource);
 
-
+        // 替换播放器
         originalVideoWrap[0].replaceChild(newVideo, originalVideoWrap[0].children[0]);
 
-        setTimeout(() => {
-            console.log(1111111111111111111)
+        // js加载完毕后运行播放器
+        jsSrc.onload = function(){
             let player = videojs('newVideo');
             player.play();
-        }, 5000);
+        }
     }
 })();
